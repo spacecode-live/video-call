@@ -1,0 +1,120 @@
+
+
+
+
+<!doctype html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+	<title>Developer Quiz</title>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js" charset="utf-8"></script>
+
+    <style>
+        .quiz {
+            display: block;
+            background: linear-gradient(to bottom, #2a86d6 0%,#7db9e8 100%);
+            padding: 40px;
+            color: #ffffff;
+        }
+
+        .quiz button {
+            display: block;
+            margin-bottom: 10px;
+            color: #000000;
+        }
+
+        .quiz .correct {
+            background-color: #ffffff;
+            padding: 5px;
+            color: #11AF08;
+            font-weight: bold;
+        }
+
+        .quiz .incorrect {
+            background-color: #ffffff;
+            padding: 5px;
+            color: #FF0C0C;
+            font-weight: bold;
+        }
+    </style>
+
+    <script type="text/babel">
+    class Quiz extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {
+                correct: null
+            };
+	document.getElementById("vid").style.visibility="hidden";
+        }
+
+        answer(correct) {
+            this.setState({
+                correct
+            });
+        }
+
+        render() {
+            let question = null;
+            if (this.state.correct === null) {
+                question = <div>
+                    <button onClick={() => this.answer(true)}>a) Yes</button>
+                    <button onClick={() => this.answer(false)}>b) No</button>
+                </div>;
+            }
+            let answer = null;
+            if (this.state.correct === true) {
+                document.getElementById("vid").style.visibility="visible";
+		document.getElementById("quiz").style.visibility="hidden";
+		document.getElementById("vid").src = "https://www.youtube.com/embed/6EEW-9NDM5k?autoplay=1"
+            } else if (this.state.correct === false) {
+                answer = <div className="incorrect"></div>;
+		document.getElementById("vid").style.visibility="hidden";
+		document.getElementById("quiz").style.visibility="hidden";
+            }
+
+            return <div className="quiz">
+                <p>Are you alone?</p>
+                {question}
+                {answer}
+            </div>;
+        }
+    }
+    ReactDOM.render(
+        <Quiz />,
+        document.getElementById('quiz')
+    );
+    </script>
+
+    </head>
+    <body>
+        <h1>Flask & Twilio Video Conference</h1>
+        <form>
+            Name: <input type="text" id="username">
+            <button id="join_leave_button">Join call</button>
+        </form>
+        <p id="count">Disconnected.</p>
+        <div id="container" class="container">
+            <div id="local" class="participant"><div></div><div>Me</div></div>
+            <!-- more participants will be added dynamically here -->
+        </div>
+	<!-- We will put our React component inside this div. -->
+
+<div id="quiz"></div>
+
+<iframe id="vid" width="748" height="421" src="https://www.youtube.com/embed/6EEW-9NDM5k?autoplay=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+        <script src="//media.twiliocdn.com/sdk/js/video/releases/2.3.0/twilio-video.min.js"></script>
+<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+	<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+
+        <script src="{{ url_for('static', filename='app.js') }}"></script>
+	<!-- Load React. -->
+	<!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+	<!-- Load our React component. -->
+	<script src="like_button.js"></script>
+    </body>
+</html>
