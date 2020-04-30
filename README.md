@@ -12,4 +12,4 @@ To install the application on your system follow these steps:
 
 
 
-This was created by fusing https://github.com/miguelgrinberg/flask-twilio-video with https://meda.io/embed-react-into-an-html-web-page/.
+This was created by learning from and building on top of https://github.com/miguelgrinberg/flask-twilio-video.
