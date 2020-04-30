@@ -6,7 +6,7 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
-	<title>Developer Quiz</title>
+	<title>Video Call App</title>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.js" charset="utf-8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.js" charset="utf-8"></script>
@@ -61,8 +61,8 @@
             let question = null;
             if (this.state.correct === null) {
                 question = <div>
-                    <button onClick={() => this.answer(true)}>b) Yes</button>
-                    <button onClick={() => this.answer(false)}>c) No</button>
+                    <button onClick={() => this.answer(true)}>a) Yes</button>
+                    <button onClick={() => this.answer(false)}>b) No</button>
                 </div>;
             }
             let answer = null;
@@ -112,9 +112,5 @@
 	<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
 
         <script src="{{ url_for('static', filename='app.js') }}"></script>
-	<!-- Load React. -->
-	<!-- Note: when deploying, replace "development.js" with "production.min.js". -->
-	<!-- Load our React component. -->
-	<script src="like_button.js"></script>
     </body>
 </html>
